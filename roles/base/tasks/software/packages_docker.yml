@@ -13,7 +13,7 @@
 
 - name: Software | Docker | Add user to group
   user:
-    name: "{{ lookup('env', 'USER') }}"
+    name: vagrant
     groups: docker
     append: yes
 
