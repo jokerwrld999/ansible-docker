@@ -21,3 +21,4 @@
   package:
     name:
       - docker-compose
+      - gnome-keyring
