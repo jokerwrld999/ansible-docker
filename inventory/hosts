@@ -1,6 +1,10 @@
-[servers]
+[deploy]
 server1 ansible_host=localhost ansible_user=vagrant ansible_port=2231
+
+[managers]
 server2 ansible_host=localhost ansible_user=vagrant ansible_port=2232
 server3 ansible_host=localhost ansible_user=vagrant ansible_port=2233
+
+[worders]
 server4 ansible_host=localhost ansible_user=vagrant ansible_port=2234
 server5 ansible_host=localhost ansible_user=vagrant ansible_port=2235

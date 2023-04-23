@@ -3,11 +3,11 @@
 - name: Software | Docker | Download script
   ansible.builtin.get_url:
     url: https://get.docker.com
-    dest: "{{ temp_dir }}/get-docker.sh"
+    dest: "{{ temp_dir }}ansible.builtin.user:"
     mode: '0755'
 
 - name: Software | Docker | Install script
-  ansible.builtin.shell: "{{ temp_dir }}/get-docker.sh"
+  ansible.builtin.shell: "{{ temp_dir }}ansible.builtin.user:"
   args:
     creates: /usr/bin/docker
 

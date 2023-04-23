@@ -1,0 +1,4 @@
+---
+
+- name: Import app task
+  ansible.builtin.include_tasks: app/app.yml
