@@ -7,7 +7,7 @@
     version: block-7
   tags: clone
 
-- name: Build | Building image
+- name: Build | Building {{ item.name }} image
   community.docker.docker_image:
     name: "{{ registry_name }}/{{ item.name }}"
     tag: "{{ item.version }}"

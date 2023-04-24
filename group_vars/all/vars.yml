@@ -1,6 +1,6 @@
 ---
 
-rmq_defaults:
+api_defaults:
   - name: AMQP_EXCHANGE
     value: xchg_integrations
   - name: AMQP_USER
@@ -10,15 +10,21 @@ rmq_defaults:
   - name: AMQP_HOSTNAME
     value: rmq
 
+rmq_defaults:
+  - name: RABBITMQ_DEFAULT_USER
+    value: "{{ rmq.user }}"
+  - name: RABBITMQ_DEFAULT_PASS
+    value: "{{ rmq.password }}"
+
 registry_name: "127.0.0.1:5000"
 
 services:
   - name: api
     version: latest
-#  - name: app
-#    version: latest
-#  - name: converter
-#    version: latest
+  - name: app
+    version: latest
+  - name: converter
+    version: latest
   - name: rmq
     version: latest
 
