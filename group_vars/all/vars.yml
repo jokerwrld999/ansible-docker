@@ -10,7 +10,7 @@ rmq_defaults:
   - name: AMQP_HOSTNAME
     value: rmq
 
-registy_name: "127.0.0.1:5000"
+registry_name: "127.0.0.1:5000"
 
 services:
   - name: api

@@ -1,4 +1,14 @@
 ---
 
-- name: Import app task
-  ansible.builtin.include_tasks: app/app.yml
+- name: App | Create network
+  community.docker.docker_network:
+    name: "{{ network_name }}"
+    driver: overlay
+
+- name: App | Deploy services
+  ansible.builtin.include_tasks:
+    file: "services/{{ item.name }}/service.yml"
+  vars:
+    - name: "{{ item.name }}"
+    - version: "{{ item.version }}"
+  loop: "{{ services }}"

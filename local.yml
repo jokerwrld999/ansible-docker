@@ -1,6 +1,7 @@
 ---
 
-- hosts: all
+- name: Pre-run | Updating packages...
+  hosts: all
   become: true
   pre_tasks:
     - name: Pre-run | update package cache (arch, manjaro)
@@ -26,7 +27,8 @@
       changed_when: false
       when: ansible_distribution == "Fedora"
 
-- hosts: all
+- name: Base | Preconfiguring hosts...
+  hosts: all
   become: true
   roles:
     - base
@@ -39,7 +41,8 @@
     - role: build
       tags: build
 
-- hosts: all
+- name: Post-run | Cleanup hosts...
+  hosts: all
   become: true
   vars_files:
     - roles/base/vars/main.yml

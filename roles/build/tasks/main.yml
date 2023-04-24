@@ -1,12 +1,13 @@
 ---
 
-- name: Build | Clone repo
+- name: Build | Cloning repo
   ansible.builtin.git:
     repo: "https://github.com/jokerwrld999/docker-demo.git"
     dest: "{{ git_folder }}"
     version: block-7
+  tags: clone
 
-- name: Build | Build image
+- name: Build | Building image
   community.docker.docker_image:
     name: "{{ registry_name }}/{{ item.name }}"
     tag: "{{ item.version }}"
@@ -15,9 +16,9 @@
       path: "{{ git_folder }}"
       dockerfile: "{{ git_folder }}/apps/{{ item.name }}/Dockerfile"
     source: build
-  loop: "{{ services | diference(non_build_services) }}"
+  loop: "{{ services | difference(non_build_services) }}"
 
-- name: Build | Delete repo
+- name: Build | Deleting repo
   ansible.builtin.file:
     path: "{{ git_folder }}"
     state: absent
