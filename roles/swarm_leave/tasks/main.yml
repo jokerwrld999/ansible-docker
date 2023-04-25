@@ -1,0 +1,19 @@
+---
+
+- name: Set node to drain
+  docker_node:
+    hostname: "{{ node_name }}"
+    availability: drain
+
+- name: Wait until containers stopped
+  community.docker.docker_host_info:
+  register: result
+  retries: 10
+  delay: 2
+  until: result.host_info.ContainersRunning == 0
+  delegate_to: "{{ node_name }}"
+
+- name: Remove node from swarm
+  community.docker.docker_swarm:
+    state: remove
+    node_id: "{{ node_name }}"

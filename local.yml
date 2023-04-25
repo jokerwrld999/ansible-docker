@@ -33,7 +33,7 @@
   roles:
     - base
 
-- name: Deploy / build server
+- name: Swarm init
   hosts: deploy
   roles:
     - role: swarm_init
@@ -60,7 +60,9 @@
       tags: build
     - role: deploy
       tags: deploy
-  tags: setup
+    - role: swarm_leave
+      node_name: server5
+      tags: swarm_leave
 
 - name: Post-run | Cleanup hosts...
   hosts: all
