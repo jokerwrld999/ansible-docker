@@ -1,0 +1,16 @@
+---
+
+- name: "{{ name }} | Configuring config"
+  block:
+    - name: "{{ name }} | Creating config"
+      ansible.builtin.include_tasks: "config_create.yml"
+  tags: "{{ name }}"
+
+  rescue:
+    - name: "{{ name }} | Deleting service"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        state: absent
+
+    - name: "{{ name }} | Creating config"
+      ansible.builtin.include_tasks: "config_create.yml"

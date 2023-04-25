@@ -1,15 +1,16 @@
 ---
 
-- name: "{{ name }} service | Configuring secret"
+- name: "{{ name }} | Configuring secret"
   ansible.builtin.include_tasks: "../secret.yml"
 
-- name: "Deploying [{{ name }}] services"
+- name: "Deploying {{ name }} services"
   block:
     - name: "{{ name }} | Deploying service"
       community.docker.docker_swarm_service:
         name: "{{ name }}"
         image: "{{ registry_name }}/{{ name }}:{{ version }}"
         state: present
+        force_update: true
         networks:
           - name: "{{ network_name }}"
         secrets:

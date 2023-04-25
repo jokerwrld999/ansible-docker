@@ -1,5 +1,7 @@
 ---
 
+advertise_addr: 192.168.56.11
+
 api_defaults:
   - name: AMQP_EXCHANGE
     value: xchg_integrations
@@ -9,12 +11,6 @@ api_defaults:
     value: "{{ rmq.password }}"
   - name: AMQP_HOSTNAME
     value: rmq
-
-rmq_defaults:
-  - name: RABBITMQ_DEFAULT_USER
-    value: "{{ rmq.user }}"
-  - name: RABBITMQ_DEFAULT_PASS
-    value: "{{ rmq.password }}"
 
 registry_name: "127.0.0.1:5000"
 
@@ -26,8 +22,16 @@ services:
   - name: converter
     version: latest
   - name: rmq
+    version: 3-management
+  - name: nginx
     version: latest
 
 non_build_services:
   - name: rmq
+    version: 3-management
+  - name: nginx
     version: latest
+
+configs:
+  converter:
+    queue: q_imageProcessor

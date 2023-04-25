@@ -4,14 +4,15 @@
   ansible.builtin.git:
     repo: "https://github.com/jokerwrld999/docker-demo.git"
     dest: "{{ git_folder }}"
-    version: block-7
-  tags: clone
+    version: block-14
 
-- name: Build | Building {{ item.name }} image
+- name: "Build | Building {{ name }} image"
   community.docker.docker_image:
     name: "{{ registry_name }}/{{ item.name }}"
     tag: "{{ item.version }}"
-    push: yes
+    push: true
+    force_source: true
+    force_tag: true
     build:
       path: "{{ git_folder }}"
       dockerfile: "{{ git_folder }}/apps/{{ item.name }}/Dockerfile"

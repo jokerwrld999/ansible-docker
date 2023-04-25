@@ -1,14 +1,18 @@
 ---
 
-- name: "{{ name }} | Configuring secret"
-  ansible.builtin.include_tasks: "../secret.yml"
+- name: "{{ name }} | Configuring config"
+  ansible.builtin.include_tasks: "../config.yml"
+  loop:
+    - nginx.conf
+  loop_control:
+    loop_var: config_item
 
 - name: "Deploying {{ name }} services"
   block:
     - name: "{{ name }} | Deploying service"
       community.docker.docker_swarm_service:
         name: "{{ name }}"
-        image: "{{ registry_name }}/{{ name }}:{{ version }}"
+        image: "nginx:{{ version }}"
         state: present
         force_update: true
         networks:
@@ -16,9 +20,9 @@
         publish:
           - mode: ingress
             protocol: tcp
-            published_port: 3002
-            target_port: 3000
-        secrets:
-          - secret_name: "{{ name }}.env"
-            filename: "/opt/app/.env"
+            published_port: 80
+            target_port: 80
+        configs:
+          - config_name: nginx.conf
+            filename: "/etc/nginx/nginx.conf"
   tags: "{{ name }}"

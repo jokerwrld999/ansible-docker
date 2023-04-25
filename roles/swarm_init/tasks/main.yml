@@ -1,0 +1,13 @@
+---
+
+- name: Swarm-init | Init a new swarm
+  community.docker.docker_swarm:
+    state: present
+    advertise_addr: "{{ advertise_addr }}"
+  register: token_content
+
+- name: Swarm-init | Saving tokens
+  set_fact:
+    token_manager: "{{ token_content.swarm_facts.JoinTokens.Manager }}"
+    token_worker: "{{ token_content.swarm_facts.JoinTokens.Worker }}"
+    cacheable: true
