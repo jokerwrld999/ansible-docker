@@ -54,4 +54,4 @@ The base React web app converts images using the Nest.js API, RabbitMQ, Converte
 
 ## Microservices Architecture
 
-![Microservices Architecture](https://github.com/jokerwrld999/ansible-docker/blob/main/image.jpg?raw=true)
+![Microservices Architecture](https://github.com/jokerwrld999/ansible-vagrant/blob/main/readme_src/microservices.png)
