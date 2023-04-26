@@ -31,7 +31,7 @@
   hosts: all
   become: true
   roles:
-    - pre_configuring
+    - pre-configure
 
 - name: Swarm init
   hosts: deploy
@@ -68,7 +68,7 @@
   hosts: all
   become: true
   vars_files:
-    - roles/pre_configuring/vars/main.yml
+    - roles/pre-configure/vars/main.yml
   tasks:
     - name: Post-cleanup | Packages (arch)
       ansible.builtin.shell: yes | pacman -Scc
@@ -92,12 +92,12 @@
       when: ansible_distribution == "Fedora"
 
     - name: community.general.telegram | Send completion alert
-      ansible.builtin.include_tasks: roles/pre_configuring/tasks/alerts/completion_alert.yml
+      ansible.builtin.include_tasks: roles/pre-configure/tasks/alerts/completion_alert.yml
       when:
         - task_failed is not defined
 
     - name: community.general.telegram | Send failure alert
-      ansible.builtin.include_tasks: roles/pre_configuring/tasks/alerts/failure_alert.yml
+      ansible.builtin.include_tasks: roles/pre-configure/tasks/alerts/failure_alert.yml
       when:
         - task_failed is defined
         - task_failed == true
