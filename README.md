@@ -42,7 +42,7 @@ This project is a collaboration of two powerful tools - the **Configuration Mana
 
 * Simple automation of hard and repeated tasks
 
-* Infrastructure as Code (IAS)
+* Infrastructure as Code (IAC)
 
 * Time-saving and support for templating
 
